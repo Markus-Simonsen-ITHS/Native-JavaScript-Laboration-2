@@ -19,6 +19,10 @@
             const authResponse = await request.text();
 
             console.log(authResponse)
+
+            localStorage.setItem('code', authResponse.toString())
+
+            window.location = "/website/"
         }
 
         asyncMain()
