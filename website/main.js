@@ -1,19 +1,20 @@
-let params = {}
+let githubParams = {}
 
-params.headers = {
+githubParams.headers = {
     "Authorization": `Bearer ${localStorage.getItem('code')}`
 }
 
-let userInfoPromise = fetch("https://api.github.com/user", params)
+const userInfoPromise = fetch("https://api.github.com/user", githubParams)
 
 document.addEventListener("DOMContentLoaded", async function () {
     let loggedInMessage = document.getElementById("loggedIn")
     let profilePic = document.getElementById("pfp")
-    let response = await userInfoPromise
-    let userInfo = await response.json()
-    if(!userInfo.login) window.location = "/website/login"
+    const response = await userInfoPromise
+    const userInfo = await response.json()
+    if (!userInfo.login) window.location = "/website/login"
     console.log(userInfo)
     profilePic.setAttribute("src", userInfo.avatar_url + "&s=50")
-    loggedInMessage.innerText = "Logged in as " + userInfo.login
-});
+    const name = userInfo.name ? userInfo.name : userInfo.login
+    loggedInMessage.innerText = "Logged in as " + name
 
+});
