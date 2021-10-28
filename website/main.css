@@ -35,7 +35,7 @@ body > section > ul > a{
 
 body > section > ul > a:hover{
     background-color: rgb(164, 199, 164);
-    transform: scale(1.05);
+    transform: scale(1.05) rotate(1deg);
 }
 
 body > section > ul > a > li > p{
