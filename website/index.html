@@ -8,6 +8,7 @@
     <title>Weather</title>
     <script src="main.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
     <link rel="stylesheet" href="main.css">
 </head>
 
@@ -15,7 +16,16 @@
     <header>
         <h1>Weather</h1>
     </header>
-    <div id="chart"></div>
+    <div id="main">
+        <div id="weatherInfo">
+            <p></p>
+            <p></p>
+        </div>
+        <div id="chart"></div>
+    </div>
+    <footer>
+        <p>All data is retrieved from SMHI</p>
+    </footer>
 </body>
 
 </html>

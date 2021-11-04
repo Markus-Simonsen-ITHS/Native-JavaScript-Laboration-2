@@ -1,6 +1,8 @@
 const url = "https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/71420/period/latest-day/data.json"
-const rainUrl = "https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/71420/period/latest-hour/data.json"
-let audio = new Audio('rain-01.mp3')
+const audio = new Audio('rain-01.mp3')
+const weatherinfo = document.querySelector('#weatherInfo').children
+let city = "Göteborg"
+moment().format();
 
 // Get the data from the url
 function fetchData() {
@@ -10,27 +12,12 @@ function fetchData() {
             // Extract the last 20 temperature values
             let temperatureValues = data.value.slice(-20)
 
-            // Print temperature values to console
-            console.log(temperatureValues)
-
             chartRenderer(temperatureValues)
+
+            weatherinfo[0].textContent = `The temperature is ${temperatureValues[temperatureValues.length - 1].value}°C`
 
         })
 }
-
-// Get rain data from url
-async function fetchRainData() {
-    let response = await fetch(rainUrl)
-    let data = await response.json()
-    let rainValues = data.value.slice(-20)
-    if (rainValues[rainValues.length - 1].value > 0) {
-        playPauseRain(true)
-    } else {
-        playPauseRain(false)
-    }
-}
-
-fetchRainData()
 
 const average = (array) => {
     let sum = 0
@@ -75,7 +62,7 @@ function chartRenderer(smhiObject) {
 // Unix time to LocaleTimeString
 function unixToISO(unix) {
     let date = new Date(unix)
-    return date.toLocaleTimeString()
+    return date.toLocaleTimeString().slice(0, -3)
 }
 
 function playPauseRain(play) {
@@ -84,4 +71,79 @@ function playPauseRain(play) {
     } else {
         audio.pause()
     }
+}
+
+// Convert city to coordinates
+function getCoordinates(city) {
+    const url = `https://nominatim.openstreetmap.org/search/${city}?format=json&limit=1`
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            let lat = data[0].lat
+            let lon = data[0].lon
+
+            // Remove decimals from coordinates
+            lat = parseFloat(lat).toFixed(3)
+            lon = parseFloat(lon).toFixed(3)
+
+            getNextRain(lat, lon)
+
+        })
+}
+
+getCoordinates(city)
+
+// Get next rain
+function getNextRain(lat, lon) {
+    const url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${lon}/lat/${lat}/data.json`
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+
+            let rainArray = data.timeSeries
+
+            let paramArray = []
+
+            // Create array of objects with only parameters
+            for (let index = 0; index < rainArray.length; index++) {
+                paramArray.push(rainArray[index].parameters)
+
+            }
+
+            let rainValues = []
+
+            for (let index = 0; index < paramArray.length; index++) {
+                // Get index of element with name pmean
+                let pmeanIndex = paramArray[index].findIndex(obj => obj.name === "pmean")
+
+                // Get the value of pmean
+                let pmeanValue = paramArray[index][pmeanIndex].values[0]
+
+                rainValues.push({
+                    value: pmeanValue,
+                    date: rainArray[index].validTime
+                })
+
+            }
+
+            let rain = rainValues.filter(obj => obj.value > 0)
+
+            let nextRain = rain[0]
+
+            let nextRainDate = moment(new Date(nextRain.date))
+
+            const humanReadableUntil = nextRainDate.fromNow()
+
+            console.log(rainValues[0].value)
+
+            // Check if it's raining
+            if (rainValues[0].value > 0) {
+                playPauseRain(true)
+                weatherinfo[1].textContent = "It's currently raining"
+            } else {
+                playPauseRain(false)
+                weatherinfo[1].textContent = `It will rain ${humanReadableUntil}`
+            }
+
+        })
 }

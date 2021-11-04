@@ -17,10 +17,44 @@ header > h1 {
     font-family: sans-serif;
     font-size: 25px;
     height: 100%;
+    margin: 5px;
+    color: rgb(48, 48, 48)
 }
 
 #chart {
-    width: 50%;
+    max-width: 1000px;
     height: 100%;
     background-color: #e2ecdb;
+}
+
+footer {
+    background-color: rgb(79, 142, 163);
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+footer > p {
+    padding: 0;
+    font-family: sans-serif;
+    height: 100%;
+    color: rgb(48, 48, 48)
+}
+
+#main {
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    max-width: 1500px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#weatherInfo {
+    padding: 10px;
+    height: 100%;
+    background-color: #a0ff5c;
+    font-family: sans-serif;
 }
