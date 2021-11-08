@@ -44,6 +44,7 @@ footer > p {
 
 #main {
     margin: auto;
+    padding: 50px;
     margin-top: 50px;
     margin-bottom: 50px;
     max-width: 1500px;
@@ -57,4 +58,6 @@ footer > p {
     height: 100%;
     background-color: #a0ff5c;
     font-family: sans-serif;
+    border-radius: 10px;
+    border:rgb(87, 87, 87) solid 2px;
 }

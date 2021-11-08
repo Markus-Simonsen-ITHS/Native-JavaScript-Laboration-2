@@ -10,7 +10,7 @@ function fetchData() {
         .then(response => response.json())
         .then(data => {
             // Extract the last 20 temperature values
-            let temperatureValues = data.value.slice(-20)
+            let temperatureValues = data.value.slice(-25)
 
             chartRenderer(temperatureValues)
 
@@ -139,10 +139,10 @@ function getNextRain(lat, lon) {
             // Check if it's raining
             if (rainValues[0].value > 0) {
                 playPauseRain(true)
-                weatherinfo[1].textContent = "It's currently raining"
+                weatherinfo[1].textContent = "It's currently precipitating"
             } else {
                 playPauseRain(false)
-                weatherinfo[1].textContent = `It will rain ${humanReadableUntil}`
+                weatherinfo[1].textContent = `It will precipitation ${humanReadableUntil}`
             }
 
         })

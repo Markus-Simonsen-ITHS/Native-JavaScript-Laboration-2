@@ -5,59 +5,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pucko väder</title>
-    <script src="main.js" defer></script>
+    <title>Cities</title>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="../main.css">
     <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
-    <header>Väder
-    </header>
-    <section>
-        <h1>Current polls:</h1>
-        <ul>
-            <a href="#">
-                <li>
-                    <p>Best poll</p>
-                </li>
-            </a>
-            <a href="#">
-                <li>
-                    <p>Best poll</p>
-                </li>
-            </a>
-            <a href="#">
-                <li>
-                    <p>Best poll</p>
-                </li>
-            </a>
-            <a href="#">
-                <li>
-                    <p>Best poll</p>
-                </li>
-            </a>
-            <a href="#">
-                <li>
-                    <p>Best poll</p>
-                </li>
-            </a>
-            <a href="#">
-                <li>
-                    <p>Best poll</p>
-                </li>
-            </a>
-            <a href="#">
-                <li>
-                    <p>Best poll</p>
-                </li>
-            </a>
-            <a href="#">
-                <li>
-                    <p>Best poll</p>
-                </li>
-            </a>
-        </ul>
-    </section>
+    <div id="nonModal">
+        <header>
+            <h1>
+                Cities
+            </h1>
+
+        </header>
+
+        <form id="addCityForm">
+            <input id="cityName" type="text" name="Name" placeholder="Name for city">
+            <input id="cityPopulation" type="number" name="Population" placeholder="Population">
+            <input type="submit" value="Add City">
+        </form>
+
+        <section>
+            <h1>Cities:</h1>
+            <ul id="CitiesList">
+            </ul>
+        </section>
+    </div>
+
+    <div id="modal" hidden>
+        <div>
+            <p>
+                This is a modal
+            </p>
+        </div>
+    </div>
 </body>
 
 </html>
