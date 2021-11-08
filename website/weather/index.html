@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pick a city</title>
+    <title>Weather</title>
     <script src="main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
     <link rel="stylesheet" href="main.css">
 </head>
 
@@ -15,15 +17,15 @@
         <h1>Weather</h1>
     </header>
     <div id="main">
-        <ul id="mainList">
-
-        </ul>
+        <div id="weatherInfo">
+            <p></p>
+            <p></p>
+        </div>
+        <div id="chart"></div>
     </div>
     <footer>
         <p>All data is retrieved from SMHI</p>
     </footer>
-
-
 </body>
 
 </html>

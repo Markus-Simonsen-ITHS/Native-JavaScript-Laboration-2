@@ -21,6 +21,11 @@ header > h1 {
     color: rgb(48, 48, 48)
 }
 
+#chart {
+    max-width: 1000px;
+    height: 100%;
+    background-color: #e2ecdb;
+}
 
 footer {
     background-color: rgb(79, 142, 163);
@@ -48,37 +53,15 @@ footer > p {
     justify-content: space-between;
 }
 
-#main > ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-#main > ul > li {
+#weatherInfo {
     padding: 10px;
-    border: 1px solid rgb(79, 142, 163);
-    border-radius: 5px;
-    background-color: rgb(255, 255, 255);
-    transition: all 0.2s;
-    margin: 10px;
-}
-
-#main > ul > li:hover {
-    background-color: rgb(79, 142, 163);
-    color: rgb(255, 255, 255);
-}
-
-#main > ul > li > a {
-    text-decoration: none;
-    color: rgb(48, 48, 48);
+    height: 100%;
+    background-color: #a0ff5c;
     font-family: sans-serif;
-    font-size: 20px;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-    transition: all 0.5s;
+    border-radius: 10px;
+    border:rgb(87, 87, 87) solid 2px;
+}
+
+.error {
+    color: red;
 }
