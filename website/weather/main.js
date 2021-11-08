@@ -6,10 +6,33 @@ const audio = new Audio('rain-01.mp3')
 const weatherinfo = document.querySelector('#weatherInfo').children
 let city = urlParams.get("cityName")
 moment().format();
+let loadingNumber = 0
+
+const hideLoading = (remove, number) => {
+    if (remove) {
+        loadingNumber -= number
+    } else {
+        loadingNumber += number
+    }
+
+    if (loadingNumber == 0) {
+        console.log("Loading done")
+        document.querySelector('#loading').classList.add('loadingHidden')
+    } else {
+        console.log("Loading in progress")
+        document.querySelector('#loading').classList.remove('loadingHidden')
+    }
+}
+
+document.querySelector('#City').textContent = city
 
 // Get the data from the url
 function fetchData() {
-    fetch(url)
+    hideLoading(false, 1)
+    fetch(url, {
+        method: 'GET',
+        cache: "no-store",
+    })
         .then(response => response.json())
         .then(data => {
             // Extract the last 20 temperature values
@@ -18,9 +41,12 @@ function fetchData() {
             chartRenderer(temperatureValues)
 
             weatherinfo[0].textContent = `The current temperature is ${temperatureValues[temperatureValues.length - 1].value}°C`
+
+            hideLoading(true, 1)
         }).catch(err => {
-            weatherinfo[0].textContent = "Failed to get temperature"
+            weatherinfo[0].textContent = "Failed to get temperature, please try again"
             weatherinfo[0].className = "error"
+            hideLoading(true, 1)
         })
 }
 
@@ -31,9 +57,6 @@ const average = (array) => {
     }
     return sum / array.length
 }
-
-// Run the fetchData function every 60 seconds
-setInterval(fetchData, 60000)
 
 fetchData()
 
@@ -46,6 +69,9 @@ function chartRenderer(smhiObject) {
     const obj = {
         chart: {
             type: 'line'
+        },
+        stroke: {
+            curve: 'straight',
         },
         series: [
             {
@@ -80,8 +106,12 @@ function playPauseRain(play) {
 
 // Convert city to coordinates
 function getCoordinates(city) {
+    hideLoading(false, 1)
     const url = `https://nominatim.openstreetmap.org/search/${city}?format=json&limit=1`
-    fetch(url)
+    fetch(url, {
+        method: 'GET',
+        cache: "force-cache",
+    })
         .then(response => response.json())
         .then(data => {
             let lat = data[0].lat
@@ -96,12 +126,20 @@ function getCoordinates(city) {
         })
 }
 
+setInterval(() => {
+    getCoordinates(city);
+    fetchData()
+}, 60000)
+
 getCoordinates(city)
 
 // Get next rain
 function getNextRain(lat, lon) {
     const url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${lon}/lat/${lat}/data.json`
-    fetch(url)
+    fetch(url, {
+        method: 'GET',
+        cache: "no-store",
+    })
         .then(response => response.json())
         .then(data => {
 
@@ -153,13 +191,15 @@ function getNextRain(lat, lon) {
                 if (nextRainDate.getDay() === new Date().getDay()) {
                     weatherinfo[1].textContent += `, that's today at ${nextRainDate.toLocaleTimeString().slice(0, -3)}`
                 }
-                if(nextRainDate.getDay() === new Date().getDay() + 1 ) {
+                if (nextRainDate.getDay() === new Date().getDay() + 1) {
                     weatherinfo[1].textContent += `, that's tomorrow at ${nextRainDate.toLocaleTimeString().slice(0, -3)}`
                 }
             }
+            hideLoading(true, 1)
 
         }).catch(err => {
-            weatherinfo[1].textContent = "Failed to get precipitation forecast"
+            weatherinfo[1].textContent = "Failed to get precipitation forecast, please try again"
             weatherinfo[1].className = "error"
+            hideLoading(true, 1)
         })
 }

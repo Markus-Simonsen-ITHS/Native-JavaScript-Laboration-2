@@ -24,6 +24,22 @@ let cityList = [
     {
         cityName: "Luleå",
         id: 162860
+    },
+    {
+        cityName: "Örebro",
+        id: 95130
+    },
+    {
+        cityName: "Helsingborg",
+        id: 62040
+    },
+    {
+        cityName: "Jönköping",
+        id: 74460
+    },
+    {
+        cityName: "Umeå",
+        id: 140480
     }
 ]
 
