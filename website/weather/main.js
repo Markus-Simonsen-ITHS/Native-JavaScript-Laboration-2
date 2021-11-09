@@ -16,10 +16,8 @@ const hideLoading = (remove, number) => {
     }
 
     if (loadingNumber == 0) {
-        console.log("Loading done")
         document.querySelector('#loading').classList.add('loadingHidden')
     } else {
-        console.log("Loading in progress")
         document.querySelector('#loading').classList.remove('loadingHidden')
     }
 }
@@ -130,6 +128,7 @@ function getCoordinates(city) {
             getNextRain(lat, lon)
 
         }).catch(err => {
+            // If city is not found
             weatherinfo[1].textContent = "Failed to get coordinates, please try again"
             weatherinfo[1].className = "error"
             hideLoading(true, 1)
@@ -217,6 +216,5 @@ function getNextRain(lat, lon) {
             weatherinfo[1].textContent = "Failed to get precipitation forecast, please try again"
             weatherinfo[1].className = "error"
             hideLoading(true, 1)
-            console.log(err)
         })
 }

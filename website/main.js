@@ -59,6 +59,11 @@ cityList.sort(function (a, b) {
     return 0;
 });
 
+window.addEventListener('resize', () => {
+    createList(cityList);
+    search.value = ""
+});
+
 // create list of cities
 function createList(cityList) {
     mainList.innerHTML = '';
@@ -74,8 +79,11 @@ function createList(cityList) {
         });
     }
 
-    // Check if recents are empty
-    if (localStorage.getItem(recentList) === null) {
+    // Check width of window
+    const width = window.innerWidth;
+
+    // Check if recents are empty 
+    if (localStorage.getItem(recentList) === null || width < 560) {
         recentDom.innerHTML = '';
     } else {
         const recentListObj = JSON.parse(localStorage.getItem(recentList));
@@ -94,7 +102,7 @@ function createList(cityList) {
 // Runs when user clicks link
 function addToRecent(ev) {
     const cityName = ev.target.text;
-    const id = ev.target.href.split('=')[1];
+    const id = ev.target.href.split('=')[1].split('&')[0];
     let recentListObj = JSON.parse(localStorage.getItem(recentList));
 
     if ( recentListObj === null ) {

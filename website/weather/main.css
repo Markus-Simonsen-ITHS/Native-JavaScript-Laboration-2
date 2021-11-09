@@ -2,6 +2,9 @@ body {
     background-color: #e2ecdb;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
@@ -92,6 +95,10 @@ footer > p {
     opacity: 0.5;
     transition: opacity 0.5s;
     animation: spin 1s infinite linear;
+}
+
+footer {
+    margin-top: auto;
 }
 
 @keyframes spin {
