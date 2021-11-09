@@ -1,6 +1,8 @@
 const mainList = document.querySelector('#mainList');
 const search = document.querySelector('#city');
 
+search.focus();
+
 let cityList = [
     {
         cityName: "Göteborg",
