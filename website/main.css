@@ -28,6 +28,11 @@ footer {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+
+    /* Make the footer go all the way to the bottom of the page */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 footer > p {
@@ -46,6 +51,8 @@ footer > p {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    flex-direction: column;
+    
 }
 
 #main > ul {
@@ -105,4 +112,27 @@ footer > p {
     border-radius: 5px;
 
     outline: none;
+}
+
+#recent {
+    display: flex !important;
+    justify-content: flex-start !important;
+    box-shadow: 0px 0px 5px rgb(79, 142, 163);
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    width: 50% !important;
+    margin: auto !important;
+    margin-bottom: 25px !important;
+    margin-top: 25px !important;
+}
+
+#recent > li {
+    border: none !important;
+}
+
+#recent > p {
+    font-family: sans-serif;
+    font-size: 20px;
+    padding: 15px;
+    border-radius: 5px;
 }
