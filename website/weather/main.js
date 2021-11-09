@@ -129,6 +129,10 @@ function getCoordinates(city) {
 
             getNextRain(lat, lon)
 
+        }).catch(err => {
+            weatherinfo[1].textContent = "Failed to get coordinates, please try again"
+            weatherinfo[1].className = "error"
+            hideLoading(true, 1)
         })
 }
 
@@ -144,7 +148,7 @@ function getNextRain(lat, lon) {
     const url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${lon}/lat/${lat}/data.json`
     fetch(url, {
         method: 'GET',
-        cache: "no-store",
+        cache: "default"
     })
         .then(response => response.json())
         .then(data => {
@@ -177,6 +181,12 @@ function getNextRain(lat, lon) {
 
             let rain = rainValues.filter(obj => obj.value > 0)
 
+            if(rain.length == 0) {
+                weatherinfo[1].textContent = "No rain in the next month"
+                hideLoading(true, 1)
+                return
+            }
+
             let nextRain = rain[0]
 
             let nextRainDate = new Date(nextRain.date)
@@ -184,8 +194,6 @@ function getNextRain(lat, lon) {
             let nextRainDateMoment = moment(nextRainDate)
 
             const humanReadableUntil = nextRainDateMoment.fromNow()
-
-            console.log()
 
             // Check if it's raining
             if (new Date().toLocaleTimeString().slice(0, -6) == nextRainDate.toLocaleTimeString().slice(0, -6)) {
