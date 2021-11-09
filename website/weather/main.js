@@ -97,6 +97,12 @@ function unixToISO(unix) {
 }
 
 function playPauseRain(play) {
+    // Set volume of audio
+    audio.volume = 0.25
+
+    // Loop audio
+    audio.loop = true
+
     if (play) {
         audio.play()
     } else {
@@ -179,8 +185,10 @@ function getNextRain(lat, lon) {
 
             const humanReadableUntil = nextRainDateMoment.fromNow()
 
+            console.log()
+
             // Check if it's raining
-            if (rainValues[0].value > 0) {
+            if (new Date().toLocaleTimeString().slice(0, -6) == nextRainDate.toLocaleTimeString().slice(0, -6)) {
                 playPauseRain(true)
                 weatherinfo[1].textContent = "It's currently precipitating"
             } else {
@@ -201,5 +209,6 @@ function getNextRain(lat, lon) {
             weatherinfo[1].textContent = "Failed to get precipitation forecast, please try again"
             weatherinfo[1].className = "error"
             hideLoading(true, 1)
+            console.log(err)
         })
 }
