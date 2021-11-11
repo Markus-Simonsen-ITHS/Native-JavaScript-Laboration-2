@@ -105,7 +105,7 @@ function addToRecent(ev) {
     const id = ev.target.href.split('=')[1].split('&')[0];
     let recentListObj = JSON.parse(localStorage.getItem(recentList));
 
-    if ( recentListObj === null ) {
+    if (recentListObj === null) {
         recentListObj = [];
     }
 
