@@ -2,13 +2,14 @@ const consent = localStorage.getItem('consent')
 
 function loadGA() {
     const jqueryScript = document.createElement('script')
-    jqueryScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-WZWLJTKVTM'
+    jqueryScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-YGV69MLBST'
     jqueryScript.onload = () => {
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'G-WZWLJTKVTM');
+        gtag('config', 'G-YGV69MLBST');
+
     }
     document.head.append(jqueryScript)
 }
