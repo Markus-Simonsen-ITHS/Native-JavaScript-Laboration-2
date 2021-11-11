@@ -8,6 +8,16 @@
     <title>Pick a city</title>
     <script src="main.js" defer></script>
     <link rel="stylesheet" href="main.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WZWLJTKVTM"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-WZWLJTKVTM');
+    </script>
 </head>
 
 <body>
@@ -16,16 +26,16 @@
             <h1>Weather</h1>
         </header>
         <div id="main">
-            <input type="text" id="city" placeholder="Enter a city" >
+            <input type="text" id="city" placeholder="Enter a city">
             <ul id="recent">
-    
+
             </ul>
             <ul id="mainList">
-    
+
             </ul>
         </div>
     </div>
-    
+
     <footer>
         <p>All data is retrieved from SMHI <a href="cities">Go to cities</a></p>
     </footer>
