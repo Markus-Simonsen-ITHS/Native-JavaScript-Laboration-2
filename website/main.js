@@ -122,7 +122,7 @@ function addToRecent(ev) {
         id: id
     });
 
-    // Limit list to 5 items
+    // Limit list to 3 items
     if (recentListObj.length > 3) {
         recentListObj.pop();
     }
