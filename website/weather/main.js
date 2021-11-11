@@ -23,6 +23,7 @@ const hideLoading = (remove, number) => {
 }
 
 document.querySelector('#City').textContent = city
+document.getElementsByTagName('title')[0].textContent = `Weather in ${city}`
 
 // Get the data from the url
 function fetchData() {
