@@ -75,3 +75,50 @@ header > p {
     font-size: 25px;
     height: 100%;
 }
+
+#addCityForm {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    max-width: 500px;
+    background-color: rgb(79, 142, 163);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 50px;
+}
+
+#addCityForm > input {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+#addCityForm > button {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    font-size: 20px;
+    font-family: sans-serif;
+    background-color: rgb(100, 187, 100);
+    color: white;
+}
+
+header > h1 > a {
+    text-decoration: none;
+
+    color: inherit;
+}
+
+@keyframes bounce {
+    0%   {transform: scale(1);}
+    50%  {transform: scale(1.1);}
+    100% {transform: scale(1);}
+}
