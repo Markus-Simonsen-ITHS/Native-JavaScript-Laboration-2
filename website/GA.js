@@ -18,12 +18,14 @@ console.log()
 
 if (consent && consent === 'true') {
     loadGA()
+} if (consent && consent === 'false') {
 } else {
     fetch(document.currentScript.getAttribute('loc') + 'cookie.html').then(response => response.text()).then(text => {
         const cookie = document.createElement('div')
         cookie.innerHTML = text
         document.body.append(cookie)
     });
+
 }
 
 function consentGA(consent) {
